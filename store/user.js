@@ -18,7 +18,7 @@ export const actions = {
     if (!response.success) {
       return response
     }
-    await commit('setUser', user)
+    commit('setUser', user)
     commit('setIsLoggedIn', true)
     return { success: true }
   },
