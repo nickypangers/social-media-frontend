@@ -18,7 +18,7 @@ export const actions = {
     if (!response.success) {
       return response
     }
-    commit('setUser', user)
+    commit('setUser', response.user)
     commit('setIsLoggedIn', true)
     return { success: true }
   },
