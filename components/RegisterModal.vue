@@ -91,7 +91,7 @@
         <button
           type="submit"
           value="submit"
-          class="bg-blue-300 p-2 rounded-xl w-full text-white"
+          class="bg-blue-300 p-2 rounded-xl w-full text-white md:col-span-2"
         >
           Register
         </button>
@@ -144,6 +144,7 @@ export default {
   },
   methods: {
     closeModal: function () {
+      this.clearInput()
       this.$store.dispatch('modal/closeRegisterModal')
     },
     numberOfDays: function () {
@@ -187,7 +188,7 @@ export default {
         console.log('Login failed')
         return
       }
-      this.$store.dispatch('modal/closeRegisterModal')
+      this.closeModal()
     },
   },
 }
@@ -195,7 +196,7 @@ export default {
 <style scoped>
 label,
 input {
-  display: block;
+  @apply block;
 }
 
 input,
@@ -205,10 +206,5 @@ select {
 
 .modal-overlay {
   background-color: #000000da;
-}
-
-.modal {
-  text-align: center;
-  background-color: white;
 }
 </style>
