@@ -1,7 +1,7 @@
 <template>
   <div>
-    <p>{{ user }}</p>
-    <button @click="login">Login</button>
+    <p>user: {{ user }}</p>
+    <p>isLoggedIn: {{ $store.state.user.isLoggedIn }}</p>
   </div>
 </template>
 
@@ -11,11 +11,6 @@ export default {
   computed: {
     user() {
       return this.$store.state.user.user
-    },
-  },
-  methods: {
-    login() {
-      this.$store.dispatch('user/login', 'hi')
     },
   },
 }
