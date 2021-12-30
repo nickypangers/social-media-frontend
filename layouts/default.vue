@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="p-3 md:p-0">
     <div class="container">
       <navbar />
       <nuxt />
     </div>
-    <register-modal v-show="showRegisterModal" />
-    <login-modal v-show="showLoginModal" />
+    <register-modal v-if="showRegisterModal" />
+    <login-modal v-if="showLoginModal" />
   </div>
 </template>
 <script>

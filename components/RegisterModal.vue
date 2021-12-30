@@ -11,10 +11,17 @@
       <form
         @submit.prevent="register"
         class="grid grid-cols-1 md:grid-cols-2 gap-3"
+        autocomplete="on"
       >
         <div>
           <label for="username">Username</label>
-          <input type="text" name="username" id="username" v-model="username" />
+          <input
+            type="text"
+            name="username"
+            id="username"
+            autocomplete="username"
+            v-model="username"
+          />
         </div>
         <div>
           <label for="password">Password</label>
@@ -22,12 +29,19 @@
             type="password"
             name="password"
             id="password"
+            autocomplete="new-password"
             v-model="password"
           />
         </div>
         <div class="md:col-span-2">
           <label for="email">Email</label>
-          <input type="text" name="email" id="email" v-model="email" />
+          <input
+            type="text"
+            name="email"
+            id="email"
+            autocomplete="email"
+            v-model="email"
+          />
         </div>
         <div class="md:col-span-2">
           <p>Date of birth</p>
@@ -38,6 +52,7 @@
                 id="month"
                 name="month"
                 class="border p-2"
+                autocomplete="bday-month"
                 v-model="dob.month"
               >
                 <option :value="0" disabled selected></option>
@@ -57,7 +72,13 @@
             </div>
             <div class="md:col-span-2">
               <label for="day">Day</label>
-              <select id="day" name="day" class="border p-2" v-model="dob.day">
+              <select
+                id="day"
+                name="day"
+                class="border p-2"
+                autocomplete="bday-day"
+                v-model="dob.day"
+              >
                 <option :value="0" disabled selected></option>
                 <option
                   v-for="day in numberOfDays()"
@@ -74,6 +95,7 @@
                 id="year"
                 name="year"
                 class="border p-2"
+                autocomplete="bday-year"
                 v-model="dob.year"
               >
                 <option :value="0" disabled selected></option>

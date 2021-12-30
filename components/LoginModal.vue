@@ -6,13 +6,19 @@
       <div class="flex justify-end">
         <button @click="closeModal">x</button>
       </div>
-      <form @submit.prevent="login">
+      <form @submit.prevent="login" autocomplete="on">
         <div>
           {{ error }}
         </div>
         <div>
           <label for="username">Username</label>
-          <input type="text" name="username" id="username" v-model="username" />
+          <input
+            type="text"
+            name="username"
+            id="username"
+            autocomplete="username"
+            v-model="username"
+          />
         </div>
         <div>
           <label for="password">Password</label>
@@ -20,6 +26,7 @@
             type="password"
             name="password"
             id="password"
+            autocomplete="current-password"
             v-model="password"
           />
         </div>
