@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <create-post-area />
+      <create-post-area v-if="isLoggedIn" />
     </div>
     <div class="grid grid-cols-1 gap-3">
       <post-teaser v-for="post in posts" :key="post._id" :post="post" />
@@ -21,6 +21,9 @@ export default {
     },
     posts() {
       return this.$store.getters['posts/getPosts']
+    },
+    isLoggedIn() {
+      return this.$store.state.user.isLoggedIn
     },
   },
   mounted() {

@@ -5,7 +5,7 @@ export const state = () => ({
 export const getters = {
   getPosts: (state) => {
     const posts = [...state.posts].sort(
-      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      (a, b) => new Date(b.created_at) - new Date(a.created_at)
     )
     return posts
   },

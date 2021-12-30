@@ -1,15 +1,17 @@
 <template>
-  <div class="flex justify-between">
-    <nuxt-link to="/">Home</nuxt-link>
-    <div v-if="!isLoggedIn" class="flex">
-      <button @click="openLoginModal">Login</button>
-      <button @click="openRegisterModal">Register</button>
+  <nav>
+    <div class="flex justify-between">
+      <nuxt-link to="/">Home</nuxt-link>
+      <div v-if="!isLoggedIn" class="flex">
+        <button @click="openLoginModal">Login</button>
+        <button @click="openRegisterModal">Register</button>
+      </div>
+      <div v-if="isLoggedIn" class="flex">
+        <p>{{ user.username }}</p>
+        <button @click="logout">Logout</button>
+      </div>
     </div>
-    <div v-if="isLoggedIn" class="flex">
-      <p>{{ user.username }}</p>
-      <button @click="logout">Logout</button>
-    </div>
-  </div>
+  </nav>
 </template>
 <script>
 export default {

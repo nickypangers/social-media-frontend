@@ -21,6 +21,10 @@ export default {
   },
   methods: {
     addPost: async function () {
+      if (!this.$store.state.user.isLoggedIn) {
+        console.log('not logged in')
+        return
+      }
       const response = await this.$axios.post('/posts/create', {
         username: this.$store.state.user.user.username,
         content: this.content,
