@@ -10,19 +10,6 @@
     <button @click="toggleCommentBox()">
       <p>comments: {{ post.comments.length }}</p>
     </button>
-    <form
-      @submit.prevent="addComment()"
-      class="flex items-center"
-      v-if="isLoggedIn"
-    >
-      <input
-        type="text"
-        v-model="comment"
-        placeholder="enter comment here"
-        class="w-full mr-3"
-      />
-      <button type="submit" value="Submit">send</button>
-    </form>
   </div>
 </template>
 <script>
@@ -57,27 +44,6 @@ export default {
     },
     toggleCommentBox: function () {
       this.isCommentBoxOpen = !this.isCommentBoxOpen
-    },
-    addComment: async function () {
-      if (!this.isLoggedIn) {
-        console.log('not logged in')
-        return
-      }
-      const response = await this.$axios.post(
-        `/posts/${this.post._id}/comments/add`,
-        {
-          username: this.$store.state.user.user.username,
-          comment: this.comment,
-        }
-      )
-      const data = response.data
-      if (!data.success) {
-        console.debug('addComment', data.message)
-        return
-      }
-      // this.post.comments.push(data.comment)
-      this.$store.dispatch('posts/getPost', this.post._id)
-      this.comment = ''
     },
     removePost: async function () {
       if (!this.isLoggedIn) {

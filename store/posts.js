@@ -1,5 +1,6 @@
 export const state = () => ({
   posts: [],
+  currentPost: {},
 })
 
 export const getters = {
@@ -25,6 +26,9 @@ export const mutations = {
       state.posts[index][key] = value
     }
   },
+  setCurrentPost(state, post) {
+    state.currentPost = post
+  },
 }
 
 export const actions = {
@@ -45,5 +49,14 @@ export const actions = {
       return
     }
     commit('setPost', data.post)
+  },
+  async getCurrentPost({ commit }, id) {
+    const response = await this.$axios.get(`/posts/${id}`)
+    const data = response.data
+    if (!data.success) {
+      console.debug('getCurrentPost', data.message)
+      return
+    }
+    commit('setCurrentPost', data.post)
   },
 }
