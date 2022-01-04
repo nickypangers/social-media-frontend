@@ -7,7 +7,7 @@
         <button @click="openRegisterModal">Register</button>
       </div>
       <div v-if="isLoggedIn" class="flex">
-        <p>{{ user.username }}</p>
+        <nuxt-link :to="`/${user.username}`">{{ user.username }}</nuxt-link>
         <button @click="logout">Logout</button>
       </div>
     </div>

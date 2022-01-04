@@ -1,15 +1,32 @@
 <template>
-  <div class="rounded-xl border p-3 cursor-pointer" @click.stop="goToPost">
-    <div class="flex justify-between items-center">
-      <p>{{ post._id }}</p>
-      <button v-if="isPostOwner" @click.stop="removePost">x</button>
+  <div class="rounded-xl border">
+    <div class="p-3 cursor-pointer" @click="goToPost">
+      <div class="flex justify-between items-center">
+        <p>{{ post._id }}</p>
+        <button v-if="isPostOwner" @click.stop="removePost" class="p-3 border">
+          x
+        </button>
+      </div>
+      <p>{{ post.username }}</p>
+      <p class="text-lg">{{ post.content }}</p>
+      <p>{{ post.created_at }}</p>
     </div>
-    <p>{{ post.username }}</p>
-    <p class="text-lg">{{ post.content }}</p>
-    <p>{{ post.created_at }}</p>
-    <button @click="toggleCommentBox()">
-      <p>comments: {{ post.comments.length }}</p>
-    </button>
+    <div class="p-3 pt-0 grid grid-cols-3">
+      <button>
+        <font-awesome-icon :icon="['far', 'comment']" size="2x" />
+      </button>
+      <div class="text-center">
+        <button v-if="!isUserLiked" @click="isUserLiked = true">
+          <font-awesome-icon :icon="['far', 'heart']" size="2x" />
+        </button>
+        <button v-if="isUserLiked" @click="isUserLiked = false">
+          <font-awesome-icon :icon="['fas', 'heart']" size="2x" />
+        </button>
+      </div>
+      <button>
+        <font-awesome-icon :icon="['fas', 'share']" size="2x" />
+      </button>
+    </div>
   </div>
 </template>
 <script>
@@ -21,10 +38,12 @@ export default {
       required: true,
     },
   },
+  emits: ['removePost'],
   data() {
     return {
       isCommentBoxOpen: false,
       comment: '',
+      isUserLiked: false,
     }
   },
   computed: {
@@ -37,6 +56,13 @@ export default {
     isPostOwner: function () {
       return this.user && this.user.username === this.post.username
     },
+    // isUserLiked: function () {
+    //   if (!this.user) {
+    //     return false
+    //   }
+    //   const index = this.user.liked.indexOf(this.post._id)
+    //   return index === -1 ? false : true
+    // },
   },
   methods: {
     goToPost: function () {
@@ -45,20 +71,8 @@ export default {
     toggleCommentBox: function () {
       this.isCommentBoxOpen = !this.isCommentBoxOpen
     },
-    removePost: async function () {
-      if (!this.isLoggedIn) {
-        console.log('not logged in')
-        return
-      }
-      const response = await this.$axios.delete(`/posts/${this.post._id}`, {
-        username: this.user.username,
-      })
-      const data = response.data
-      if (!data.success) {
-        console.debug('removePost', data.message)
-        return
-      }
-      this.$store.dispatch('posts/fetchPosts')
+    removePost: function () {
+      this.$emit('removePost', this.post)
     },
   },
 }

@@ -4,7 +4,10 @@
     <p>Comments: {{ comments.length }}</p>
     <div v-for="comment in comments" :key="comment._id">
       <p>
-        {{ comment.username }} - {{ comment.comment }} @
+        <nuxt-link :to="`/${comment.username}/`">{{
+          comment.username
+        }}</nuxt-link>
+        - {{ comment.comment }} @
         {{ stringToDate(comment.created_at) }}
       </p>
     </div>

@@ -27,7 +27,15 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/fontawesome',
   ],
+
+  fontawesome: {
+    icons: {
+      solid: ['faShare', 'faBookmark', 'faComment', 'faHeart'],
+      regular: ['faBookmark', 'faComment', 'faHeart'],
+    },
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -45,5 +53,11 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    loaders: {
+      vue: {
+        compiler: require('vue-template-babel-compiler'),
+      },
+    },
+  },
 }
